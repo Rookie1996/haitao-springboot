@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.UsersAddressMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.UsersAddress" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ua_id" property="uaId" jdbcType="INTEGER" />
+    <result column="ua_postalcode" property="uaPostalcode" jdbcType="VARCHAR" />
+    <result column="ua_name" property="uaName" jdbcType="VARCHAR" />
+    <result column="ua_tel" property="uaTel" jdbcType="VARCHAR" />
+    <result column="ua_province" property="uaProvince" jdbcType="VARCHAR" />
+    <result column="ua_city" property="uaCity" jdbcType="VARCHAR" />
+    <result column="ua_country" property="uaCountry" jdbcType="VARCHAR" />
+    <result column="ua_detail" property="uaDetail" jdbcType="VARCHAR" />
+    <result column="ua_default" property="uaDefault" jdbcType="TINYINT" />
+    <result column="u_id" property="uId" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

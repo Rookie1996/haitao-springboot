@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.SkdImageMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.SkdImage" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="skd_id" property="skdId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="countSkdImage" resultType="INTEGER" parameterType="String" >
+    select count(*) from skd_image
+    where url = #{url}
+  </select>
+
+  <update id="deleteSkdImageBySkdId">
+    UPDATE skd_image
+    set is_del = 1
+    where skd_id = #{skdId}
+  </update>
+
+  <select id="selectUrlsBySkdId" resultType="String" parameterType="String">
+    select url
+    from skd_image
+    where skd_id = #{skdId} and is_del = 0;
+  </select>
+
+  <update id="deleteSkdImageByUrl">
+    UPDATE skd_image
+    set is_del = 1
+    where url = #{url}
+  </update>
+
+</mapper>

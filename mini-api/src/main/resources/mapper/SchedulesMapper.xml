@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.SchedulesMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.Schedules" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="skd_id" property="skdId" jdbcType="VARCHAR" />
+    <result column="skd_title" property="skdTitle" jdbcType="VARCHAR" />
+    <result column="skd_desc" property="skdDesc" jdbcType="VARCHAR" />
+    <result column="skd_img_url" property="skdImgUrl" jdbcType="VARCHAR" />
+    <result column="skd_starttime" property="skdStarttime" jdbcType="TIMESTAMP" />
+    <result column="skd_endtime" property="skdEndtime" jdbcType="TIMESTAMP" />
+    <result column="skd_likes" property="skdLikes" jdbcType="INTEGER" />
+    <result column="skd_starlevel" property="skdStarlevel" jdbcType="INTEGER" />
+    <result column="skd_destination" property="skdDestination" jdbcType="VARCHAR" />
+    <result column="skd_status" property="skdStatus" jdbcType="TINYINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <!-- 命名太不规范 修改为selectPublishedSkdByUid  -->
+  <select id="selectPublishedSkdByUid" resultMap="BaseResultMap">
+    select * from schedules
+    where uid = #{uid} and skd_status = 0 or skd_status = 1
+    order by skd_status
+  </select>
+
+<!--  按uid和行程状态查询行程信息 -->
+  <select id="selectSkdByUIdAndStatus" resultMap="BaseResultMap">
+    select * from schedules
+    where uid = #{uid} and skd_status = #{status}
+  </select>
+
+  <update id="updateNullByUrl">
+    update schedules
+    set skd_img_url = NULL
+    where skd_img_url = #{url}
+  </update>
+
+
+</mapper>

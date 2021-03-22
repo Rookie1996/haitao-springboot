@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.Users" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="u_id" property="uId" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="u_name" property="uName" jdbcType="VARCHAR" />
+    <result column="u_gender" property="uGender" jdbcType="INTEGER" />
+    <result column="u_age" property="uAge" jdbcType="INTEGER" />
+    <result column="u_email" property="uEmail" jdbcType="VARCHAR" />
+    <result column="u_intro" property="uIntro" jdbcType="VARCHAR" />
+    <result column="u_type" property="uType" jdbcType="VARCHAR" />
+    <result column="u_address" property="uAddress" jdbcType="VARCHAR" />
+    <result column="u_face_image" property="uFaceImage" jdbcType="VARCHAR" />
+    <result column="u_nickname" property="uNickname" jdbcType="VARCHAR" />
+    <result column="u_like_counts" property="uLikeCounts" jdbcType="INTEGER" />
+    <result column="u_level" property="uLevel" jdbcType="INTEGER" />
+    <result column="u_register_time" property="uRegisterTime" jdbcType="TIMESTAMP" />
+    <result column="u_third_party_id" property="uThirdPartyId" jdbcType="INTEGER" />
+    <result column="u_logout_time" property="uLogoutTime" jdbcType="TIMESTAMP" />
+    <result column="u_is_del" property="uIsDel" jdbcType="TINYINT" />
+  </resultMap>
+</mapper>

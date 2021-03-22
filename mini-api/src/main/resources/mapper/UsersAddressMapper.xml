@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.UsersAddressMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.UsersAddress" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ua_id" property="uaId" jdbcType="INTEGER" />
+    <result column="ua_postalcode" property="uaPostalcode" jdbcType="VARCHAR" />
+    <result column="ua_name" property="uaName" jdbcType="VARCHAR" />
+    <result column="ua_tel" property="uaTel" jdbcType="VARCHAR" />
+    <result column="ua_province" property="uaProvince" jdbcType="VARCHAR" />
+    <result column="ua_city" property="uaCity" jdbcType="VARCHAR" />
+    <result column="ua_country" property="uaCountry" jdbcType="VARCHAR" />
+    <result column="ua_detail" property="uaDetail" jdbcType="VARCHAR" />
+    <result column="ua_default" property="uaDefault" jdbcType="TINYINT" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="u_id" property="uId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <!-- 查询userId所有收货地址   -->
+  <select id="selectAllAddressByUserId" resultMap="BaseResultMap" parameterType="String">
+      select *
+      from users_address
+      where u_id = #{userId}
+      order by ua_id
+   </select>
+
+  <!-- 取消默认地址 -->
+    <update id="cancelDefault" >
+        update users_address
+        set ua_default = 0
+        where ua_default = 1
+    </update>
+
+  <!-- 设置默认地址状态   -->
+    <update id="setDefaultAddress" parameterType="String">
+        update users_address
+        set ua_default = 1
+        where ua_id = #{uaId} and u_id = #{userId}
+    </update>
+
+  <!--  删除指定用户的指定收货地址  -->
+    <delete id="deleteByUaIdAndUserId" parameterType="String">
+      delete
+      from users_address
+      where ua_id = #{uaId} and u_id = #{userId}
+    </delete>
+
+
+
+
+</mapper>

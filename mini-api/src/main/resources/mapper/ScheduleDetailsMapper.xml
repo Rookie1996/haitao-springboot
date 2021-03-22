@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.ScheduleDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.ScheduleDetails" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="skd_detail_id" property="skdDetailId" jdbcType="VARCHAR" />
+    <result column="skd_detail_article" property="skdDetailArticle" jdbcType="VARCHAR" />
+    <result column="skd_detail_place" property="skdDetailPlace" jdbcType="VARCHAR" />
+    <result column="skd_detail_timepoint" property="skdDetailTimepoint" jdbcType="TIMESTAMP" />
+    <result column="skd_detail_active" property="skdDetailActive" jdbcType="INTEGER" />
+    <result column="skd_id" property="skdId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectAllSkdDetailBySkdId" resultMap="BaseResultMap">
+    select * from schedule_details
+    where skd_id = #{skdId}
+    order by skd_detail_timepoint
+  </select>
+
+  <update id="updateStatusBySkdDetailId">
+    update schedule_details
+    set skd_detail_active = #{status}
+    where skd_detail_id = #{skdDetailId}
+  </update>
+
+</mapper>
