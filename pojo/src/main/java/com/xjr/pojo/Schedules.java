@@ -3,6 +3,7 @@ package com.xjr.pojo;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Schedules implements Serializable {
@@ -38,7 +39,7 @@ public class Schedules implements Serializable {
      * 平均评星
      */
     @Column(name = "skd_starlevel")
-    private Integer skdStarlevel;
+    private BigDecimal skdStarlevel;
 
     /**
      * 行程目的地
@@ -168,7 +169,7 @@ public class Schedules implements Serializable {
      *
      * @return skd_starlevel - 平均评星
      */
-    public Integer getSkdStarlevel() {
+    public BigDecimal getSkdStarlevel() {
         return skdStarlevel;
     }
 
@@ -177,7 +178,7 @@ public class Schedules implements Serializable {
      *
      * @param skdStarlevel 平均评星
      */
-    public void setSkdStarlevel(Integer skdStarlevel) {
+    public void setSkdStarlevel(BigDecimal skdStarlevel) {
         this.skdStarlevel = skdStarlevel;
     }
 

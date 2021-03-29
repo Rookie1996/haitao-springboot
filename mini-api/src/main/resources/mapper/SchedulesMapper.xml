@@ -12,7 +12,7 @@
     <result column="skd_starttime" property="skdStarttime" jdbcType="TIMESTAMP" />
     <result column="skd_endtime" property="skdEndtime" jdbcType="TIMESTAMP" />
     <result column="skd_likes" property="skdLikes" jdbcType="INTEGER" />
-    <result column="skd_starlevel" property="skdStarlevel" jdbcType="INTEGER" />
+    <result column="skd_starlevel" property="skdStarlevel" jdbcType="DECIMAL" />
     <result column="skd_destination" property="skdDestination" jdbcType="VARCHAR" />
     <result column="skd_status" property="skdStatus" jdbcType="TINYINT" />
     <result column="uid" property="uid" jdbcType="VARCHAR" />
@@ -37,5 +37,17 @@
     where skd_img_url = #{url}
   </update>
 
+<!--  根据默认规则查询所有行程卡片-->
+  <select id="selectAllSkdCards" resultMap="BaseResultMap">
+    select * from schedules
+    where skd_status = 0 or skd_status = 1
+    order by skd_status, skd_starlevel DESC ,skd_likes DESC
+  </select>
+
+  <select id="selectUserIdBySkdId" resultType="String">
+    select uid
+    from schedules
+    where skd_id = #{skdId}
+  </select>
 
 </mapper>

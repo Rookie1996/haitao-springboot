@@ -53,4 +53,12 @@ public class UserServiceImpl implements UserService {
         // 部分更新mysql
         usersMapper.updateByPrimaryKeySelective(users);
     }
+
+    @Override
+    public Users queryUserInfo(String userId) {
+
+        Users users = usersMapper.selectByPrimaryKey(userId);
+
+        return users;
+    }
 }

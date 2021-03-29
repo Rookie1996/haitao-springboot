@@ -192,6 +192,8 @@ public class ScheduleController extends BaseController{
 
     /**
      * 4、行程删除接口，删除按钮触发
+     *
+     * 2021/3/24 重要结论：与之关联的skdDetail、skdProduct也需要修改状态，但是对用户的显示没有影响。只会按is_del=0的行程进行显示
      */
     @ApiOperation(value = "删除用户行程", httpMethod = "POST", notes = "删除用户行程")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -423,7 +425,7 @@ public class ScheduleController extends BaseController{
         logger.info("删除修改的行程图片接口：行程skdId============================="+skdId);
         logger.info("删除修改的行程图片接口：行程图片url============================="+url);
 
-        // 1、删除skd_image中图片
+        // 1、删除skd_image中图片 --- 删除搜索待优化。（表中不止一个行程）只使用url就是全表搜索。使用and带上skdId搜索，先走主键索引然后缩小搜索范围！
         skdImageService.deleteImgByUrl(url);
 
         // 2、删除schedules中主图片（如果命中url的话）
@@ -431,8 +433,8 @@ public class ScheduleController extends BaseController{
 
         // 3、删除虚拟目录中的图片
         String uploadFilePath = FILE_SPACE + url;
-//        File file = new File(uploadFilePath);
-//        deleteVirtualDirFile(file);
+        File file = new File(uploadFilePath);
+        deleteVirtualDirFile(file);
 
         return JSONResult.ok();
     }

@@ -77,5 +77,19 @@ public class UserController extends BaseController{
     }
 
 
+    // 2021/3/29获取个人信息接口
+    @ApiOperation(value = "获取完整个人信息接口", httpMethod = "GET", notes = "获取完整个人信息接口")
+    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+    public JSONResult getUserInfo(@ApiParam(required = true, value = "用户id", name = "userId")
+                                  @RequestParam(value = "userId", required = true)String userId){
+
+
+        logger.info("获取完整个人信息接口:userId========================================"+userId);
+
+        Users users = userService.queryUserInfo(userId);
+
+        return JSONResult.ok(users);
+    }
+
 
 }

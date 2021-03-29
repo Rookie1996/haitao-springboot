@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.ProductsMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.Products" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="p_id" property="pId" jdbcType="VARCHAR" />
+    <result column="p_name" property="pName" jdbcType="VARCHAR" />
+    <result column="p_brand" property="pBrand" jdbcType="VARCHAR" />
+    <result column="p_unit" property="pUnit" jdbcType="VARCHAR" />
+    <result column="p_origin" property="pOrigin" jdbcType="VARCHAR" />
+    <result column="p_info" property="pInfo" jdbcType="VARCHAR" />
+    <result column="p_desc" property="pDesc" jdbcType="VARCHAR" />
+    <result column="p_sales" property="pSales" jdbcType="INTEGER" />
+    <result column="p_price" property="pPrice" jdbcType="DECIMAL" />
+    <result column="p_status" property="pStatus" jdbcType="INTEGER" />
+    <result column="p_main_img_url" property="pMainImgUrl" jdbcType="VARCHAR" />
+    <result column="p_is_del" property="pIsDel" jdbcType="TINYINT" />
+    <result column="skd_id" property="skdId" jdbcType="VARCHAR" />
+  </resultMap>
+
+<!--  resultType="BaseResultMap"修改为resultMap="BaseResultMap"-->
+  <select id="selectProductsBySkdId" resultMap="BaseResultMap">
+    select * from products
+    where skd_id = #{skdId} and p_is_del = 0
+    order by p_status
+  </select>
+
+  <select id="selectPnameCount" resultType="INTEGER">
+    select count(*)
+    from products
+    where p_name = #{pName}
+  </select>
+
+  <update id="deleteProductByPid">
+    update products
+    set p_is_del = 1
+    where p_id = #{pid}
+  </update>
+
+  <update id="increaseSalesByPid">
+    update products
+    set p_sales = p_sales + #{number}
+    where p_id = #{pid}
+  </update>
+
+</mapper>

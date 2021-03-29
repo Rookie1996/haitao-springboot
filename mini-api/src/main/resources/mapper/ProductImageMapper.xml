@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.ProductImageMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.ProductImage" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectUrlsByPid" resultType="String">
+    select url
+    from product_image
+    where product_id = #{pid}
+  </select>
+
+  <select id="countSkdProductImage" resultType="INTEGER">
+    select count(*)
+    from product_image
+    where url = #{url}
+  </select>
+
+  <update id="deleteImageByUrlAndPid">
+    update product_image
+    set is_del = 1
+    where product_id = #{pid} and url = #{url}
+  </update>
+
+  <!--  删除所有pid的图片-->
+  <update id="deleteImageByPid">
+    update product_image
+    set is_del = 1
+    where product_id = #{pid}
+  </update>
+
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.SearchRecordsMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.SearchRecords" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="sr_id" property="srId" jdbcType="INTEGER" />
+    <result column="sr_content" property="srContent" jdbcType="VARCHAR" />
+    <result column="sr_destination" property="srDestination" jdbcType="VARCHAR" />
+    <result column="sr_entity" property="srEntity" jdbcType="VARCHAR" />
+    <result column="sr_uid" property="srUid" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

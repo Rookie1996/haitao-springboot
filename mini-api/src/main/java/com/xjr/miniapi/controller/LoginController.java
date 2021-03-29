@@ -190,8 +190,10 @@ public class LoginController extends BaseController{
             users.setuFaceImage(data.getAvatarUrl());
             users.setuAddress(data.getCountry()+"-"+data.getProvince()+"-"+data.getCity());
             users.setuNickname(data.getNickName());
+            // 必须添加注册时间
             users.setuRegisterTime(new Date());
-            users.setuThirdPartyId(0);
+            users.setuThirdParty("phone");
+            users.setuAddrComplete((byte)0);
             users.setuIntro("还没有简介！");
 
             userService.saveUser(users);

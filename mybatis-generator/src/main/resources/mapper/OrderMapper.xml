@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.Order" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <id column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <id column="u_id" property="uId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="delivery_time" property="deliveryTime" jdbcType="TIMESTAMP" />
+    <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
+    <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
+    <result column="receiver_phone" property="receiverPhone" jdbcType="VARCHAR" />
+    <result column="receiver_post_code" property="receiverPostCode" jdbcType="VARCHAR" />
+    <result column="receiver_province" property="receiverProvince" jdbcType="VARCHAR" />
+    <result column="receiver_city" property="receiverCity" jdbcType="VARCHAR" />
+    <result column="receiver_region" property="receiverRegion" jdbcType="VARCHAR" />
+    <result column="receiver_detail_addr" property="receiverDetailAddr" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="delivery_company" property="deliveryCompany" jdbcType="VARCHAR" />
+    <result column="delivery_sn" property="deliverySn" jdbcType="VARCHAR" />
+    <result column="total_count" property="totalCount" jdbcType="INTEGER" />
+    <result column="is_del" property="isDel" jdbcType="TINYINT" />
+  </resultMap>
+</mapper>

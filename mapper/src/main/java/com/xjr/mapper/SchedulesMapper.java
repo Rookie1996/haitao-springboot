@@ -34,4 +34,20 @@ public interface SchedulesMapper extends MyMapper<Schedules> {
     public void updateNullByUrl(@Param("url")String url);
 
 
+    // IndexController所使用到的方法
+
+    /**
+     * 根据默认规则查询所有行程卡片
+     * @return
+     */
+    public List<Schedules> selectAllSkdCards();
+
+
+    /**
+     * 根据skdId查询发布的用户id
+     * @return
+     */
+    public String selectUserIdBySkdId(String skdId);
+
+
 }

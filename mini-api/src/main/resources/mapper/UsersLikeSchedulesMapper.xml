@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.UsersLikeSchedulesMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.UsersLikeSchedules" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="from_user_id" property="fromUserId" jdbcType="VARCHAR" />
+    <result column="to_user_id" property="toUserId" jdbcType="VARCHAR" />
+    <result column="skd_id" property="skdId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <select id="selectNumsBySkdId" resultType="INTEGER">
+    select count(*)
+    from users_like_schedules
+    where skd_id = #{skdId}
+  </select>
+
+<!-- 根据userId和skdId删除操作记录 -->
+  <delete id="deleteByUserIdAndSkdId">
+    delete from users_like_schedules
+    where from_user_id = #{userId} and skd_id = #{skdId}
+  </delete>
+
+<!--根据userId和skdId查询点赞操作记录-->
+  <select id="selectCntByUserIdAndSkdId" resultType="INTEGER">
+    select count(*)
+    from users_like_schedules
+    where from_user_id = #{userId} and skd_id = #{skdId}
+  </select>
+</mapper>

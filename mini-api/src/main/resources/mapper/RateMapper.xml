@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.RateMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.Rate" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="from_user_id" property="fromUserId" jdbcType="VARCHAR" />
+    <result column="to_user_id" property="toUserId" jdbcType="VARCHAR" />
+    <result column="skd_id" property="skdId" jdbcType="VARCHAR" />
+    <result column="stars" property="stars" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <select id="selectAverageStarsBySkdId" resultType="DECIMAL">
+    select AVG(stars) as average
+    from rate
+    where skd_id = #{skdId}
+  </select>
+
+  <select id="selectRateByUserIdAndSkdId" resultType="DECIMAL">
+    select stars
+    from rate
+    where from_user_id = #{userId} and skd_id = #{skdId}
+  </select>
+
+  <update id="updateRateByUserIdAndSkdId">
+    update rate
+    set stars = #{stars}
+    where from_user_id = #{userId} and skd_id = #{skdId}
+  </update>
+</mapper>

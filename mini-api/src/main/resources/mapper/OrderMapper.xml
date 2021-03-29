@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjr.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.xjr.pojo.Order" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <id column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <id column="u_id" property="uId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="delivery_time" property="deliveryTime" jdbcType="TIMESTAMP" />
+    <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
+    <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
+    <result column="receiver_phone" property="receiverPhone" jdbcType="VARCHAR" />
+    <result column="receiver_post_code" property="receiverPostCode" jdbcType="VARCHAR" />
+    <result column="receiver_province" property="receiverProvince" jdbcType="VARCHAR" />
+    <result column="receiver_city" property="receiverCity" jdbcType="VARCHAR" />
+    <result column="receiver_region" property="receiverRegion" jdbcType="VARCHAR" />
+    <result column="receiver_detail_addr" property="receiverDetailAddr" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="delivery_company" property="deliveryCompany" jdbcType="VARCHAR" />
+    <result column="delivery_sn" property="deliverySn" jdbcType="VARCHAR" />
+    <result column="total_count" property="totalCount" jdbcType="INTEGER" />
+    <result column="is_del" property="isDel" jdbcType="TINYINT" />
+  </resultMap>
+
+  <select id="selectOrderIdByOrderNo" resultType="LONG">
+    select id
+    from `order`
+    where order_no = #{orderNo}
+  </select>
+
+    <select id="selectAllOrderByUserId" resultMap="BaseResultMap">
+        select *
+        from `order`
+        where u_id = #{userId}
+        order by status
+    </select>
+
+    <select id="selectOrderByUserIdAndStatus" resultMap="BaseResultMap">
+        select *
+        from `order`
+        where u_id = #{userId} and status = #{status}
+    </select>
+
+    <select id="selectOrderByStatus" resultMap="BaseResultMap">
+        select *
+        from `order`
+        where status = #{status}
+    </select>
+
+    <update id="updateOrderStatusByOrderNo">
+        update `order`
+        set status = #{status}
+        where order_no = #{orderNo}
+    </update>
+
+  <insert id="insertOrder">
+    insert into `order`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+<!--      <if test="id != null" >-->
+<!--        id,-->
+<!--      </if>-->
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="userId != null" >
+        u_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+<!--      <if test="payment_time != null" >-->
+<!--        payment_time,-->
+<!--      </if>-->
+<!--      <if test="delivery_time != null" >-->
+<!--        delivery_time,-->
+<!--      </if>-->
+<!--      <if test="receive_time != null" >-->
+<!--        receive_time,-->
+<!--      </if>-->
+      <if test="receiverName != null" >
+        receiver_name,
+      </if>
+      <if test="receiverPhone != null" >
+        receiver_phone,
+      </if>
+      <if test="receiverPostCode != null" >
+        receiver_post_code,
+      </if>
+      <if test="receiverProvince != null" >
+        receiver_province,
+      </if>
+
+      <if test="receiverCity != null" >
+        receiver_city,
+      </if>
+      <if test="receiverRegion != null" >
+        receiver_region,
+      </if>
+      <if test="receiverDetailAddr != null" >
+        receiver_detail_addr,
+      </if>
+<!--      <if test="note != null" >-->
+<!--        note,-->
+<!--      </if>-->
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+<!--      <if test="delivery_company != null" >-->
+<!--        delivery_company,-->
+<!--      </if>-->
+<!--      <if test="delivery_sn != null" >-->
+<!--        delivery_sn,-->
+<!--      </if>-->
+      <if test="totalCount != null" >
+        total_count,
+      </if>
+<!--      <if test="is_del != null" >-->
+<!--        is_del,-->
+<!--      </if>-->
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        #{orderNo},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+      <if test="receiverName != null" >
+        #{receiverName},
+      </if>
+      <if test="receiverPhone != null" >
+        #{receiverPhone},
+      </if>
+      <if test="receiverPostCode != null" >
+        #{receiverPostCode},
+      </if>
+      <if test="receiverProvince != null" >
+        #{receiverProvince},
+      </if>
+      <if test="receiverCity != null" >
+        #{receiverCity},
+      </if>
+      <if test="receiverRegion != null" >
+        #{receiverRegion},
+      </if>
+      <if test="receiverDetailAddr != null" >
+        #{receiverDetailAddr},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice},
+      </if>
+      <if test="status != null" >
+        #{status},
+      </if>
+      <if test="totalCount != null" >
+        #{totalCount}
+      </if>
+    </trim>
+
+  </insert>
+
+</mapper>

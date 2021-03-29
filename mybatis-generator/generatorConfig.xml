@@ -36,7 +36,10 @@
         <!--        <table tableName="users_like_videos"></table>-->
         <!--        <table tableName="users_report"></table>-->
         <!--        <table tableName="videos"></table>-->
-        <table tableName="skd_detail_image"></table>
+<!--        <table tableName="stock"></table>-->
+<!--        <table tableName="products"></table>-->
+<!--        <table tableName="product_spec"></table>-->
+        <table tableName="search_records"></table>
 
     </context>
 </generatorConfiguration>

@@ -18,9 +18,11 @@
     <result column="u_nickname" property="uNickname" jdbcType="VARCHAR" />
     <result column="u_like_counts" property="uLikeCounts" jdbcType="INTEGER" />
     <result column="u_level" property="uLevel" jdbcType="INTEGER" />
+    <result column="u_location" property="uLocation" jdbcType="VARCHAR" />
+    <result column="u_third_party" property="uThirdParty" jdbcType="VARCHAR" />
     <result column="u_register_time" property="uRegisterTime" jdbcType="TIMESTAMP" />
-    <result column="u_third_party_id" property="uThirdPartyId" jdbcType="INTEGER" />
     <result column="u_logout_time" property="uLogoutTime" jdbcType="TIMESTAMP" />
+    <result column="u_addr_complete" property="uAddrComplete" jdbcType="TINYINT" />
     <result column="u_is_del" property="uIsDel" jdbcType="TINYINT" />
   </resultMap>
 </mapper>

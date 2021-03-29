@@ -19,6 +19,9 @@ public class Users {
     @Column(name = "u_name")
     private String uName;
 
+    /**
+     * 0-女,1-男
+     */
     @Column(name = "u_gender")
     private Integer uGender;
 
@@ -34,9 +37,15 @@ public class Users {
     @Column(name = "u_intro")
     private String uIntro;
 
+    /**
+     * 用户类型
+     */
     @Column(name = "u_type")
     private String uType;
 
+    /**
+     * 微信获取的所在地信息
+     */
     @Column(name = "u_address")
     private String uAddress;
 
@@ -52,14 +61,32 @@ public class Users {
     @Column(name = "u_level")
     private Integer uLevel;
 
+    /**
+     * 当前定位地点，根据地点推荐行程
+     */
+    @Column(name = "u_location")
+    private String uLocation;
+
+    /**
+     * 设备登录型号
+     */
+    @Column(name = "u_third_party")
+    private String uThirdParty;
+
     @Column(name = "u_register_time")
     private Date uRegisterTime;
 
-    @Column(name = "u_third_party_id")
-    private Integer uThirdPartyId;
-
+    /**
+     * 登出时间
+     */
     @Column(name = "u_logout_time")
     private Date uLogoutTime;
+
+    /**
+     * 0-收货地址未完善，1-收货地址已完善
+     */
+    @Column(name = "u_addr_complete")
+    private Byte uAddrComplete;
 
     /**
      * 0-活跃，1-已注销
@@ -118,14 +145,18 @@ public class Users {
     }
 
     /**
-     * @return u_gender
+     * 获取0-女,1-男
+     *
+     * @return u_gender - 0-女,1-男
      */
     public Integer getuGender() {
         return uGender;
     }
 
     /**
-     * @param uGender
+     * 设置0-女,1-男
+     *
+     * @param uGender 0-女,1-男
      */
     public void setuGender(Integer uGender) {
         this.uGender = uGender;
@@ -178,28 +209,36 @@ public class Users {
     }
 
     /**
-     * @return u_type
+     * 获取用户类型
+     *
+     * @return u_type - 用户类型
      */
     public String getuType() {
         return uType;
     }
 
     /**
-     * @param uType
+     * 设置用户类型
+     *
+     * @param uType 用户类型
      */
     public void setuType(String uType) {
         this.uType = uType;
     }
 
     /**
-     * @return u_address
+     * 获取微信获取的所在地信息
+     *
+     * @return u_address - 微信获取的所在地信息
      */
     public String getuAddress() {
         return uAddress;
     }
 
     /**
-     * @param uAddress
+     * 设置微信获取的所在地信息
+     *
+     * @param uAddress 微信获取的所在地信息
      */
     public void setuAddress(String uAddress) {
         this.uAddress = uAddress;
@@ -262,6 +301,42 @@ public class Users {
     }
 
     /**
+     * 获取当前定位地点，根据地点推荐行程
+     *
+     * @return u_location - 当前定位地点，根据地点推荐行程
+     */
+    public String getuLocation() {
+        return uLocation;
+    }
+
+    /**
+     * 设置当前定位地点，根据地点推荐行程
+     *
+     * @param uLocation 当前定位地点，根据地点推荐行程
+     */
+    public void setuLocation(String uLocation) {
+        this.uLocation = uLocation;
+    }
+
+    /**
+     * 获取设备登录型号
+     *
+     * @return u_third_party - 设备登录型号
+     */
+    public String getuThirdParty() {
+        return uThirdParty;
+    }
+
+    /**
+     * 设置设备登录型号
+     *
+     * @param uThirdParty 设备登录型号
+     */
+    public void setuThirdParty(String uThirdParty) {
+        this.uThirdParty = uThirdParty;
+    }
+
+    /**
      * @return u_register_time
      */
     public Date getuRegisterTime() {
@@ -276,31 +351,39 @@ public class Users {
     }
 
     /**
-     * @return u_third_party_id
-     */
-    public Integer getuThirdPartyId() {
-        return uThirdPartyId;
-    }
-
-    /**
-     * @param uThirdPartyId
-     */
-    public void setuThirdPartyId(Integer uThirdPartyId) {
-        this.uThirdPartyId = uThirdPartyId;
-    }
-
-    /**
-     * @return u_logout_time
+     * 获取登出时间
+     *
+     * @return u_logout_time - 登出时间
      */
     public Date getuLogoutTime() {
         return uLogoutTime;
     }
 
     /**
-     * @param uLogoutTime
+     * 设置登出时间
+     *
+     * @param uLogoutTime 登出时间
      */
     public void setuLogoutTime(Date uLogoutTime) {
         this.uLogoutTime = uLogoutTime;
+    }
+
+    /**
+     * 获取0-收货地址未完善，1-收货地址已完善
+     *
+     * @return u_addr_complete - 0-收货地址未完善，1-收货地址已完善
+     */
+    public Byte getuAddrComplete() {
+        return uAddrComplete;
+    }
+
+    /**
+     * 设置0-收货地址未完善，1-收货地址已完善
+     *
+     * @param uAddrComplete 0-收货地址未完善，1-收货地址已完善
+     */
+    public void setuAddrComplete(Byte uAddrComplete) {
+        this.uAddrComplete = uAddrComplete;
     }
 
     /**
