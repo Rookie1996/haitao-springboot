@@ -49,5 +49,16 @@ public interface SchedulesMapper extends MyMapper<Schedules> {
      */
     public String selectUserIdBySkdId(String skdId);
 
+    /**
+     *
+     * 根据关键词和排序条件查询行程信息
+     *
+     * @param keyword
+     * @param loc
+     * @param condition1
+     * @param condition2
+     * @return
+     */
+    public List<Schedules> selectByCondition(String keyword, String loc, Integer condition1, Integer condition2, Integer condition3);
 
 }

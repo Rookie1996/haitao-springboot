@@ -72,4 +72,14 @@ public interface IndexService {
      */
     public List<String> getHotWords();
 
+
+    /**
+     * 将查询记录存储到数据库中
+     * @param searchContent
+     * @param loc
+     * @param keywords
+     * @param userId
+     */
+    void saveSearchRecords(String searchContent, String loc, String keywords, String userId);
+
 }

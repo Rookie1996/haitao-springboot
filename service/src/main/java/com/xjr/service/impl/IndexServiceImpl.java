@@ -8,6 +8,7 @@ import com.xjr.pojo.vo.*;
 import com.xjr.service.IndexService;
 import com.xjr.utils.PagedResult;
 import com.xjr.utils.SqlDate;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -60,6 +61,9 @@ public class IndexServiceImpl implements IndexService {
 
     @Autowired
     private SchedulesMapper schedulesMapper;
+
+
+    // 2021/3/30 该方法分页搜索schedules对象，封装成cardVO之后传给前端的！！！
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
@@ -248,5 +252,24 @@ public class IndexServiceImpl implements IndexService {
         List<String> hotwordsList = searchRecordsMapper.getHotWords();
 
         return hotwordsList;
+    }
+
+    @Override
+    public void saveSearchRecords(String searchContent, String loc, String keywords, String userId) {
+        if(StringUtils.isEmpty(searchContent)){
+            return;
+        }
+        // 防止没有抽取信息的内容，进入数据库
+        if(StringUtils.isEmpty(loc) && StringUtils.isEmpty(keywords)){
+            return;
+        }
+        SearchRecords searchRecords = new SearchRecords();
+        searchRecords.setSrContent(searchContent);
+        searchRecords.setSrDestination(loc);
+        searchRecords.setSrEntity(keywords);
+        if(!StringUtils.isEmpty(userId)){
+            searchRecords.setSrUid(userId);
+        }
+        searchRecordsMapper.insertSelective(searchRecords);
     }
 }

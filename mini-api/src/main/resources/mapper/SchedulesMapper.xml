@@ -50,4 +50,50 @@
     where skd_id = #{skdId}
   </select>
 
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select *
+    from schedules
+    <!--  根据规则设置where条件-->
+    <where>
+      <if test="keyword != null and keyword != ''">
+        skd_title like "%"#{keyword}"%" OR skd_desc like "%"#{keyword}"%"
+      </if>
+      <if test="loc != null and loc != ''">
+        OR skd_destination like "%"#{loc}"%"
+      </if>
+      <choose>
+        <when test="condition3 == 0">
+          AND skd_status != 0
+        </when>
+        <when test="condition3 == 1">
+          AND skd_status != 1
+        </when>
+        <otherwise>
+        </otherwise>
+      </choose>
+    </where>
+
+    <!--  根据规则设置order by条件-->
+    order by
+    <choose>
+      <when test="condition1 == 0">
+        skd_status
+      </when>
+      <otherwise>
+        skd_starttime DESC 
+      </otherwise>
+    </choose>
+    <choose>
+      <when test="condition2 == 1">
+        ,skd_likes DESC
+      </when>
+      <when test="condition2 == 2">
+        ,skd_starlevel DESC
+      </when>
+      <otherwise>
+      </otherwise>
+    </choose>
+
+  </select>
+
 </mapper>

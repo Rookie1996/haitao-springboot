@@ -2,15 +2,20 @@ package com.xjr.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.xjr.mapper.CommentsMapper;
+import com.xjr.mapper.RateMapper;
 import com.xjr.mapper.SchedulesMapper;
 import com.xjr.mapper.SkdImageMapper;
+import com.xjr.pojo.Comments;
 import com.xjr.pojo.Schedules;
 import com.xjr.pojo.SkdImage;
+import com.xjr.pojo.vo.selectCardVO;
 import com.xjr.service.ScheduleService;
 import com.xjr.utils.DateCrossUtils;
 import com.xjr.utils.JSONResult;
 import com.xjr.utils.PagedResult;
 import com.xjr.utils.SqlDate;
+import io.swagger.models.auth.In;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.n3r.idworker.Sid;
@@ -23,12 +28,20 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
+
+    @Autowired
+    private CommentsMapper commentsMapper;
+
+    @Autowired
+    private RateMapper rateMapper;
 
     @Autowired
     private SchedulesMapper schedulesMapper;
@@ -230,6 +243,102 @@ public class ScheduleServiceImpl implements ScheduleService {
     public void deleteUrlIfExist(String url) {
         // url ---> null
         schedulesMapper.updateNullByUrl(url);
+    }
+
+    @Transactional
+    @Override
+    public PagedResult getSkdsByCondition(List<String> keywords, Map<String, Integer> countMap, Integer currentPage,
+                                          Integer pageSize, String skdTime, String likesOrSales, String status) {
+
+        String time[] = {"全部行程","最新发布"};
+        String likes[] = {"默认排序","点赞排序","好评排序"};
+        String statusArr[] = {"未完成","已完成"};
+
+        Integer condition1 = skdTime.equals("全部行程")?0: 1;
+
+        Integer condition2 = 0;
+        switch (likesOrSales){
+            case "默认排序":
+                condition2 = 0;
+                break;
+            case "点赞排序":
+                condition2 = 1;
+                break;
+            case "好评排序":
+                condition2 = 2;
+                break;
+            default: break;
+        }
+
+        Integer condition3 = -1;
+        if(status.equals("未完成")){
+            condition3 = 0;
+        }else if(status.equals("已完成")){
+            condition3 = 1;
+        }
+
+
+        // 1、关键词取前3个做模糊匹配
+        // 暂时只取一个出现频率最高的关键词
+        String keyword = "";
+        if(keywords.size()>0){
+            keyword = keywords.get(0);
+        }
+
+        // 2、地点取前3个做模糊匹配
+        // 暂时只取一个出现频率最高的地点词
+        String loc = "";
+        Integer cnt = 0;
+        if(countMap.size()>0){
+            for(Map.Entry<String, Integer> entry : countMap.entrySet()){
+                if(entry.getValue()>cnt){
+                    loc = entry.getKey();
+                    cnt = entry.getValue();
+                }
+            }
+        }
+
+        // 3、开始分页操作
+        PageHelper.startPage(currentPage, pageSize);
+
+        List<Schedules> list = new ArrayList<>();
+
+        // 4、进行sql调用
+        list = schedulesMapper.selectByCondition(keyword, loc, condition1, condition2, condition3);
+
+        List<selectCardVO> cardList = new ArrayList<>();
+
+        // 5、加载短评、rate信息
+        for(Schedules schedules: list){
+            String skdId = schedules.getSkdId();
+
+            BigDecimal rate = rateMapper.selectAverageStarsBySkdId(skdId);
+
+            List<Comments> comments = commentsMapper.selectCommentsBySkdId(skdId);
+
+            selectCardVO selectCardVO = new selectCardVO();
+            selectCardVO.setSchedules(schedules);
+            selectCardVO.setRate(rate);
+            selectCardVO.setCommentsList(comments);
+
+            cardList.add(selectCardVO);
+        }
+
+
+        // 6、分页显示
+        PageInfo<Schedules> pageList = new PageInfo<>(list);
+
+        PagedResult pagedResult = new PagedResult();
+        //当前页数
+        pagedResult.setPage(currentPage);
+        //总页数
+        pagedResult.setTotal(pageList.getPages());
+        //每行显示的内容
+        pagedResult.setRows(cardList);
+        //总记录数
+        pagedResult.setRecords(pageList.getTotal());
+
+        return pagedResult;
     }
 
 

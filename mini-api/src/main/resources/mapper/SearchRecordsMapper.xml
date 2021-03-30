@@ -16,10 +16,12 @@
     select word
     from (select sr_entity as word,count(sr_entity) as count
     from search_records
+    where sr_entity is not NULL
     group by sr_entity
     union
     select sr_destination,count(sr_destination)
     from search_records
+    where sr_destination is not NULL
     group by sr_destination) as t1
     order by t1.count desc
   </select>

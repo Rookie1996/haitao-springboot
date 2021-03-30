@@ -2,8 +2,10 @@ package com.xjr.service;
 
 import com.xjr.pojo.Schedules;
 import com.xjr.utils.PagedResult;
+import io.swagger.models.auth.In;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ScheduleService {
 
@@ -87,4 +89,17 @@ public interface ScheduleService {
      * @param url
      */
     public void deleteUrlIfExist(String url);
+
+    /**
+     * 根据各种条件查询行程
+     * @param keywords
+     * @param countMap
+     * @param currentPage
+     * @param pageSize
+     * @param skdTime
+     * @param likesOrSales
+     * @return
+     */
+    public PagedResult getSkdsByCondition(List<String>keywords, Map<String,Integer>countMap, Integer currentPage,
+                                          Integer pageSize, String skdTime, String likesOrSales, String status);
 }
