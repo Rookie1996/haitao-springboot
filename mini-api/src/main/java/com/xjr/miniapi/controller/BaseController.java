@@ -13,7 +13,8 @@ public class BaseController {
 //    public static final String USER_REDIS_SESSION = "user-redis-session";
 
     // 文件保存的命名空间
-    public static final String FILE_SPACE = "D:\\haitao_dev";
+//    public static final String FILE_SPACE = "D:\\haitao_dev";
+    public static final String FILE_SPACE = "/haitao_dev";
 
     public static final String APP_ID = "wxcb5adcf07fc3a00d";
 

@@ -21,8 +21,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
                 //Swagger静态资源的路径
                 .addResourceLocations("classpath:/META-INF/resources/")
                 //windows目录下虚拟目录
-                .addResourceLocations("file:D:/haitao_dev/");
-//        .addResourceLocations("file:/haitao_dev/"); //linux
+//                .addResourceLocations("file:D:/haitao_dev/");
+        .addResourceLocations("file:/haitao_dev/"); //linux
     }
 
     @Bean
